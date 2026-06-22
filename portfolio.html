@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Srimathi Dhinakaran · SPA Portfolio</title>
+  <!-- Google Font & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <!-- Devicon for tech icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+      background: #080c14;
+      color: #eef2f6;
+      line-height: 1.6;
+    }
+
+    /* full‑page SPA layout */
+    .portfolio-wrapper {
+      min-height: 100vh;
+      width: 100%;
+      background: radial-gradient(ellipse at 30% 20%, #141e30, #080c14 80%);
+      padding: 2rem 3rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.6);
+    }
+
+    @media (max-width: 768px) {
+      .portfolio-wrapper {
+        padding: 1.2rem 1rem;
+      }
+    }
+
+    .glass-card {
+      flex: 1;
+      background: rgba(12, 18, 30, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 2.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.02);
+      padding: 2rem 2.8rem;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s;
+    }
+
+    @media (max-width: 768px) {
+      .glass-card {
+        padding: 1.2rem 1rem;
+        border-radius: 2rem;
+      }
+    }
+
+    /* HERO SECTION */
+    .hero-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1rem 0 0.8rem 0;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .hero-greeting {
+      font-size: 2.8rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .hero-greeting .highlight-name {
+      background: linear-gradient(to right, #6c8cff, #a78bfa, #6c8cff);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s linear infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: #8899bb;
+      margin-top: 0.1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 1.2rem;
+    }
+
+    .hero-sub i {
+      color: #7b9cff;
+    }
+
+    .hero-sub .badge-hero {
+      background: rgba(108, 140, 255, 0.12);
+      padding: 0.15rem 1rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #b7cbff;
+      border: 1px solid rgba(108, 140, 255, 0.1);
+    }
+
+    @media (max-width: 600px) {
+      .hero-greeting {
+        font-size: 2rem;
+      }
+      .hero-sub {
+        font-size: 0.95rem;
+      }
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 3px;
+      height: 1.2em;
+      background: #7b9cff;
+      margin-left: 4px;
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* NAVIGATION - SPA tabs */
+    .nav-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem 0.6rem;
+      margin-bottom: 1.4rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #8899bb;
+      cursor: pointer;
+      border-radius: 40px;
+      transition: 0.25s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .nav-btn i {
+      font-size: 1rem;
+      color: #6b7fa3;
+    }
+
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.04);
+      color: #d6e0ff;
+    }
+
+    .nav-btn.active {
+      background: linear-gradient(145deg, #4f73e0, #8b6df0);
+      color: #ffffff;
+      box-shadow: 0 8px 24px -6px rgba(79, 115, 224, 0.4);
+    }
+
+    .nav-btn.active i {
+      color: white;
+    }
+
+    /* PAGE CONTAINER - SPA view */
+    .page-container {
+      flex: 1;
+      position: relative;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .page-container::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .page-container::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.02);
+      border-radius: 10px;
+    }
+
+    .page-container::-webkit-scrollbar-thumb {
+      background: #4f73e0;
+      border-radius: 10px;
+    }
+
+    .page {
+      display: none;
+      animation: fadeUp 0.3s ease;
+      height: 100%;
+    }
+
+    .page.active-page {
+      display: block;
+    }
+
+    @keyframes fadeUp {
+      0% { opacity: 0.3; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #f0f4ff;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 0.4rem;
+    }
+
+    .section-title i {
+      color: #7b9cff;
+      font-size: 1.6rem;
+      width: 2.2rem;
+    }
+
+    /* GRID & CARDS */
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 720px) {
+      .grid-2col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .edu-item, .achieve-item, .project-item {
+      background: rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(4px);
+      padding: 1.2rem 1.6rem;
+      border-radius: 1.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      transition: 0.25s;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .edu-item:hover, .achieve-item:hover, .project-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(108, 140, 255, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 32px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .edu-item h3, .achieve-item h3, .project-item h3 {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #eef2f6;
+    }
+
+    .meta {
+      font-weight: 500;
+      color: #8fb0ff;
+      font-size: 0.9rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.2rem 0.8rem;
+      margin: 0.2rem 0 0.3rem;
+    }
+
+    .meta i {
+      color: #6f8ed6;
+      width: 1.2rem;
+    }
+
+    .highlight-tag {
+      background: rgba(108, 140, 255, 0.12);
+      padding: 0.1rem 1rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #b7cbff;
+      border: 1px solid rgba(108, 140, 255, 0.08);
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .project-tech span {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 0.15rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      color: #b7cbff;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    /* SKILLS & TOOLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .skill-card {
+      background: rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(4px);
+      padding: 1.2rem 1.2rem;
+      border-radius: 1.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      transition: 0.25s;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .skill-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(108, 140, 255, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 32px -10px rgba(0, 0, 0, 0.6);
+    }
+
+    .skill-card .skill-icon {
+      font-size: 2.8rem;
+      line-height: 1;
+      color: #b7cbff;
+    }
+
+    .skill-card .skill-icon .devicon {
+      font-size: 2.8rem;
+      color: #b7cbff;
+    }
+
+    .skill-card .skill-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #eef2f6;
+    }
+
+    .skill-card .skill-category {
+      font-size: 0.7rem;
+      color: #8fa3c9;
+      background: rgba(255,255,255,0.03);
+      padding: 0.1rem 0.8rem;
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .skills-section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #b7cbff;
+      margin: 1.2rem 0 0.8rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      padding-bottom: 0.3rem;
+    }
+
+    .skills-section-title i {
+      color: #7b9cff;
+    }
+
+    .about-box {
+      background: rgba(255, 255, 255, 0.02);
+      padding: 1.4rem 1.8rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.2rem;
+    }
+
+    @media (min-width: 1024px) {
+      .project-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* FOOTER - SPA footer with real contact */
+    .footer-contact {
+      margin-top: 1.6rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.2rem;
+    }
+
+    .contact-links a {
+      color: #b7cbff;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.9rem;
+      transition: 0.15s;
+    }
+
+    .contact-links a i {
+      color: #7b9cff;
+      font-size: 1rem;
+    }
+
+    .contact-links a:hover {
+      color: #ffffff;
+      text-shadow: 0 0 14px rgba(108, 140, 255, 0.25);
+    }
+
+    .footnote {
+      font-size: 0.75rem;
+      color: #627598;
+    }
+
+    @media (max-width: 600px) {
+      .contact-links a {
+        font-size: 0.8rem;
+      }
+      .contact-links {
+        gap: 0.3rem 0.8rem;
+      }
+    }
+
+    .achieve-item i, .project-item i {
+      filter: drop-shadow(0 0 8px rgba(108, 140, 255, 0.15));
+    }
+  </style>
+</head>
+<body>
+
+<div class="portfolio-wrapper">
+  <div class="glass-card">
+
+    <!-- HERO SECTION -->
+    <div class="hero-section">
+      <div class="hero-greeting">
+        HI, I AM <span class="highlight-name">SRIMATHI DHINAKARAN</span>
+        <span class="typing-cursor"></span>
+      </div>
+      <div class="hero-sub">
+        <span><i class="fas fa-graduation-cap"></i> BE · CSE · Kongu Engineering College</span>
+        <span class="badge-hero"><i class="fas fa-calendar-alt"></i> 2024 – 2028</span>
+        <span><i class="fas fa-map-pin"></i> Perundurai</span>
+      </div>
+    </div>
+
+    <!-- NAVIGATION - SPA tabs -->
+    <div class="nav-tabs" id="navTabs">
+      <button class="nav-btn active" data-page="pageProfile"><i class="fas fa-user"></i> Profile</button>
+      <button class="nav-btn" data-page="pageEducation"><i class="fas fa-university"></i> Education</button>
+      <button class="nav-btn" data-page="pageAchievements"><i class="fas fa-trophy"></i> Achievements</button>
+      <button class="nav-btn" data-page="pageProjects"><i class="fas fa-folder-open"></i> Projects</button>
+      <button class="nav-btn" data-page="pageSkills"><i class="fas fa-code"></i> Skills & Tools</button>
+    </div>
+
+    <!-- PAGE CONTAINER - SPA views -->
+    <div class="page-container">
+
+      <!-- PAGE 1: PROFILE -->
+      <div class="page active-page" id="pageProfile">
+        <div class="section-title"><i class="fas fa-user-astronaut"></i> About Me</div>
+        <div class="about-box">
+          <p style="font-size:1.05rem; color:#d6e0ff; max-width:850px;">
+            <i class="fas fa-quote-left" style="color:#7b9cff; opacity:0.4; margin-right:8px;"></i>
+            Aspiring software engineer with a strong foundation in computer science, problem‑solving, and full‑stack development. 
+            Passionate about building clean, user‑centric applications and exploring AI/ML.
+          </p>
+          <div style="display:flex; flex-wrap:wrap; gap:1rem 2.5rem; margin-top:1.4rem;">
+            <div><i class="fas fa-map-marker-alt" style="color:#7b9cff; width:1.8rem;"></i> Perundurai, Tamil Nadu</div>
+            <div><i class="fas fa-calendar-alt" style="color:#7b9cff; width:1.8rem;"></i> 2024 – 2028 (expected)</div>
+            <div><i class="fas fa-star" style="color:#fbbf24; width:1.8rem;"></i> CGPA: 8.28 / 10.0</div>
+          </div>
+        </div>
+        <div style="margin-top:1.5rem; display:flex; flex-wrap:wrap; gap:1.2rem;">
+          <div style="flex:1; min-width:150px; background:rgba(255,255,255,0.02); border-radius:1.5rem; padding:1rem 1.2rem; border:1px solid rgba(255,255,255,0.04);">
+            <i class="fas fa-bolt" style="color:#7b9cff; font-size:1.6rem;"></i>
+            <h4 style="margin:0.3rem 0 0.1rem; color:#eef2f6;">Quick Learner</h4>
+            <p style="font-size:0.85rem; color:#8fa3c9;">Adaptive & curious</p>
+          </div>
+          <div style="flex:1; min-width:150px; background:rgba(255,255,255,0.02); border-radius:1.5rem; padding:1rem 1.2rem; border:1px solid rgba(255,255,255,0.04);">
+            <i class="fas fa-users" style="color:#7b9cff; font-size:1.6rem;"></i>
+            <h4 style="margin:0.3rem 0 0.1rem; color:#eef2f6;">Team Player</h4>
+            <p style="font-size:0.85rem; color:#8fa3c9;">Collaborative & open</p>
+          </div>
+          <div style="flex:1; min-width:150px; background:rgba(255,255,255,0.02); border-radius:1.5rem; padding:1rem 1.2rem; border:1px solid rgba(255,255,255,0.04);">
+            <i class="fas fa-rocket" style="color:#7b9cff; font-size:1.6rem;"></i>
+            <h4 style="margin:0.3rem 0 0.1rem; color:#eef2f6;">Problem Solver</h4>
+            <p style="font-size:0.85rem; color:#8fa3c9;">Analytical mindset</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAGE 2: EDUCATION -->
+      <div class="page" id="pageEducation">
+        <div class="section-title"><i class="fas fa-university"></i> Education</div>
+        <div class="grid-2col">
+          <div class="edu-item">
+            <h3>B.E. Computer Science & Engineering</h3>
+            <div class="meta">
+              <span><i class="fas fa-school"></i> Kongu Engineering College</span>
+              <span><i class="fas fa-map-pin"></i> Perundurai</span>
+            </div>
+            <p><i class="fas fa-calendar-check" style="color:#7b9cff; width:1.2rem;"></i> 2024 – 2028 · <span class="highlight-tag">Pursuing</span></p>
+            <p style="margin-top:0.2rem; color:#b7cbff;"><i class="fas fa-star" style="color:#fbbf24;"></i> CGPA: 8.28 (till 3rd sem)</p>
+          </div>
+          <div class="edu-item">
+            <h3>Higher Secondary (12th)</h3>
+            <div class="meta">
+              <span><i class="fas fa-school"></i> Kongu Matriculation Hr. Sec. School</span>
+            </div>
+            <p><i class="fas fa-calendar-check" style="color:#7b9cff;"></i> 2022 – 2024 · <span class="highlight-tag">92.4%</span></p>
+          </div>
+          <div class="edu-item">
+            <h3>Secondary (10th)</h3>
+            <div class="meta">
+              <span><i class="fas fa-school"></i> Kongu Matriculation Hr. Sec. School</span>
+            </div>
+            <p><i class="fas fa-calendar-check" style="color:#7b9cff;"></i> 2020 – 2021 · <span class="highlight-tag">94.1%</span></p>
+          </div>
+          <div class="edu-item" style="background:rgba(108,140,255,0.04); border-color:rgba(108,140,255,0.08);">
+            <h3><i class="fas fa-certificate" style="color:#7b9cff;"></i> Certifications</h3>
+            <ul style="list-style:none; margin-top:0.3rem;">
+              <li style="padding:0.2rem 0;"><i class="fas fa-check-circle" style="color:#7b9cff;"></i> AWS Cloud Practitioner (basics)</li>
+              <li style="padding:0.2rem 0;"><i class="fas fa-check-circle" style="color:#7b9cff;"></i> Python for Data Science (NPTEL)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAGE 3: ACHIEVEMENTS -->
+      <div class="page" id="pageAchievements">
+        <div class="section-title"><i class="fas fa-trophy"></i> Achievements</div>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:1.2rem;">
+          <div class="achieve-item">
+            <i class="fas fa-heartbeat" style="color:#7b9cff; font-size:1.6rem;"></i>
+            <h3 style="margin:0.4rem 0 0.1rem;">VITB Healthack</h3>
+            <p style="font-size:0.85rem; color:#b7cbff;">Rural healthcare solution · telemedicine prototype</p>
+            <span class="highlight-tag" style="margin-top:0.2rem; display:inline-block;">Top 10 finalist</span>
+          </div>
+          <div class="achieve-item">
+            <i class="fas fa-medal" style="color:#7b9cff; font-size:1.6rem;"></i>
+            <h3 style="margin:0.4rem 0 0.1rem;">Smart India Hackathon 2025</h3>
+            <p style="font-size:0.85rem; color:#b7cbff;">Finalist · rural education platform</p>
+            <span class="highlight-tag" style="margin-top:0.2rem; display:inline-block;">Team lead</span>
+          </div>
+          <div class="achieve-item">
+            <i class="fas fa-award" style="color:#7b9cff; font-size:1.6rem;"></i>
+            <h3 style="margin:0.4rem 0 0.1rem;">CodeChef Starters 2024</h3>
+            <p style="font-size:0.85rem; color:#b7cbff;">Ranked 147 among 5k+ participants</p>
+            <span class="highlight-tag" style="margin-top:0.2rem; display:inline-block;">Division 3</span>
+          </div>
+          <div class="achieve-item">
+            <i class="fas fa-pencil-alt" style="color:#7b9cff; font-size:1.6rem;"></i>
+            <h3 style="margin:0.4rem 0 0.1rem;">Paper Presentation</h3>
+            <p style="font-size:0.85rem; color:#b7cbff;">“Edge AI for Smart Farming” · 2nd prize</p>
+            <span class="highlight-tag" style="margin-top:0.2rem; display:inline-block;">IIT Madras</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAGE 4: PROJECTS -->
+      <div class="page" id="pageProjects">
+        <div class="section-title"><i class="fas fa-folder-open"></i> Projects</div>
+        <div class="project-grid">
+          <div class="project-item">
+            <i class="fas fa-hospital" style="color:#7b9cff; font-size:1.4rem;"></i>
+            <h3 style="margin:0.3rem 0 0.1rem;">Rural Health Care</h3>
+            <p style="font-size:0.85rem; color:#b7cbff;">Telemedicine & health record system for rural areas</p>
+            <div class="project-tech"><span>React</span><span>Node.js</span><span>MongoDB</span></div>
+          </div>
+          <div class="project-item">
+            <i class="fas fa-wallet" style="color:#7b9cff; font-size:1.4rem;"></i>
+            <h3 style="margin:0.3rem 0 0.1rem;">Smart Expense Tracker</h3>
+            <p style="font-size:0.85rem; color:#b7cbff;">AI-based expense categorization & budget insights</p>
+            <div class="project-tech"><span>Python</span><span>Flask</span><span>SQLite</span></div>
+          </div>
+          <div class="project-item">
+            <i class="fas fa-brain" style="color:#7b9cff; font-size:1.4rem;"></i>
+            <h3 style="margin:0.3rem 0 0.1rem;">ML Hospital Intrusion Detection</h3>
+            <p style="font-size:0.85rem; color:#b7cbff;">ML-based security system for hospital zones</p>
+            <div class="project-tech"><span>Python</span><span>TensorFlow</span><span>OpenCV</span></div>
+          </div>
+          <div class="project-item">
+            <i class="fas fa-gamepad" style="color:#7b9cff; font-size:1.4rem;"></i>
+            <h3 style="margin:0.3rem 0 0.1rem;">Gamification E‑learning Platform</h3>
+            <p style="font-size:0.85rem; color:#b7cbff;">Interactive learning with rewards & leaderboards</p>
+            <div class="project-tech"><span>React</span><span>Firebase</span><span>Node.js</span></div>
+          </div>
+          <div class="project-item">
+            <i class="fas fa-university" style="color:#7b9cff; font-size:1.4rem;"></i>
+            <h3 style="margin:0.3rem 0 0.1rem;">ATM System</h3>
+            <p style="font-size:0.85rem; color:#b7cbff;">Simulated banking system with transaction history</p>
+            <div class="project-tech"><span>Java</span><span>MySQL</span></div>
+          </div>
+          <div class="project-item">
+            <i class="fas fa-chart-line" style="color:#7b9cff; font-size:1.4rem;"></i>
+            <h3 style="margin:0.3rem 0 0.1rem;">AI Fintech Stock Analysis</h3>
+            <p style="font-size:0.85rem; color:#b7cbff;">AI-driven stock market prediction & analysis tool</p>
+            <div class="project-tech"><span>Python</span><span>LSTM</span><span>Streamlit</span></div>
+          </div>
+          <div class="project-item">
+            <i class="fas fa-user-graduate" style="color:#7b9cff; font-size:1.4rem;"></i>
+            <h3 style="margin:0.3rem 0 0.1rem;">Aluminex</h3>
+            <p style="font-size:0.85rem; color:#b7cbff;">Alumni interaction platform for college network</p>
+            <div class="project-tech"><span>MERN</span><span>JWT</span><span>Socket.io</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAGE 5: SKILLS & TOOLS -->
+      <div class="page" id="pageSkills">
+        <div class="section-title"><i class="fas fa-code"></i> Skills & Tools</div>
+
+        <!-- Programming Languages -->
+        <div class="skills-section-title"><i class="fas fa-terminal"></i> Languages</div>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-icon"><i class="devicon-c-plain"></i></div>
+            <div class="skill-name">C</div>
+            <div class="skill-category">Language</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon"><i class="devicon-cplusplus-plain"></i></div>
+            <div class="skill-name">C++</div>
+            <div class="skill-category">Language</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon"><i class="devicon-java-plain"></i></div>
+            <div class="skill-name">Java</div>
+            <div class="skill-category">Language</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon"><i class="devicon-javascript-plain"></i></div>
+            <div class="skill-name">JavaScript</div>
+            <div class="skill-category">Language</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon"><i class="devicon-python-plain"></i></div>
+            <div class="skill-name">Python</div>
+            <div class="skill-category">Language</div>
+          </div>
+        </div>
+
+        <!-- Frameworks & Libraries -->
+        <div class="skills-section-title"><i class="fas fa-layer-group"></i> Frameworks & Libraries</div>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-icon"><i class="devicon-react-original"></i></div>
+            <div class="skill-name">React</div>
+            <div class="skill-category">Library</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon"><i class="devicon-nodejs-plain"></i></div>
+            <div class="skill-name">Node.js</div>
+            <div class="skill-category">Runtime</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon"><i class="devicon-express-original"></i></div>
+            <div class="skill-name">Express</div>
+            <div class="skill-category">Framework</div>
+          </div>
+        </div>
+
+        <!-- Databases -->
+        <div class="skills-section-title"><i class="fas fa-database"></i> Databases</div>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-icon"><i class="devicon-mysql-plain"></i></div>
+            <div class="skill-name">MySQL</div>
+            <div class="skill-category">Database</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon"><i class="devicon-mongodb-plain"></i></div>
+            <div class="skill-name">MongoDB</div>
+            <div class="skill-category">Database</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon"><i class="devicon-postgresql-plain"></i></div>
+            <div class="skill-name">PostgreSQL</div>
+            <div class="skill-category">Database</div>
+          </div>
+        </div>
+
+        <!-- Tools & Platforms -->
+        <div class="skills-section-title"><i class="fas fa-toolbox"></i> Tools & Platforms</div>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-icon"><i class="devicon-github-original"></i></div>
+            <div class="skill-name">GitHub</div>
+            <div class="skill-category">Tool</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon"><i class="devicon-vscode-plain"></i></div>
+            <div class="skill-name">VS Code</div>
+            <div class="skill-category">Tool</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon"><i class="devicon-intellij-plain"></i></div>
+            <div class="skill-name">IntelliJ IDEA</div>
+            <div class="skill-category">Tool</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon"><i class="fas fa-rocket" style="font-size:2.8rem; color:#b7cbff;"></i></div>
+            <div class="skill-name">Antigravity</div>
+            <div class="skill-category">Tool</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon"><i class="devicon-docker-plain"></i></div>
+            <div class="skill-name">Docker</div>
+            <div class="skill-category">Tool</div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon"><i class="devicon-git-plain"></i></div>
+            <div class="skill-name">Git</div>
+            <div class="skill-category">Tool</div>
+          </div>
+        </div>
+
+        <!-- Soft Skills -->
+        <div class="skills-section-title"><i class="fas fa-brain"></i> Soft Skills</div>
+        <div style="display:flex; flex-wrap:wrap; gap:0.6rem; margin-bottom:0.5rem;">
+          <span class="skill-card" style="padding:0.5rem 1.2rem; flex:0 1 auto; background:rgba(255,255,255,0.02); border-radius:2rem; border:1px solid rgba(255,255,255,0.04);">
+            <span style="font-size:0.9rem; color:#b7cbff;">Communication</span>
+          </span>
+          <span class="skill-card" style="padding:0.5rem 1.2rem; flex:0 1 auto; background:rgba(255,255,255,0.02); border-radius:2rem; border:1px solid rgba(255,255,255,0.04);">
+            <span style="font-size:0.9rem; color:#b7cbff;">Teamwork</span>
+          </span>
+          <span class="skill-card" style="padding:0.5rem 1.2rem; flex:0 1 auto; background:rgba(255,255,255,0.02); border-radius:2rem; border:1px solid rgba(255,255,255,0.04);">
+            <span style="font-size:0.9rem; color:#b7cbff;">Problem Solving</span>
+          </span>
+          <span class="skill-card" style="padding:0.5rem 1.2rem; flex:0 1 auto; background:rgba(255,255,255,0.02); border-radius:2rem; border:1px solid rgba(255,255,255,0.04);">
+            <span style="font-size:0.9rem; color:#b7cbff;">Adaptability</span>
+          </span>
+        </div>
+      </div>
+
+    </div> <!-- end page-container -->
+
+    <!-- FOOTER - SPA footer with real contact -->
+    <div class="footer-contact">
+      <div class="contact-links">
+        <a href="mailto:srimathi.dhinakaran2006@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+        <a href="tel:+919487277675"><i class="fas fa-phone-alt"></i> +91 94872 77675</a>
+        <a href="https://www.linkedin.com/in/srimathi-dhinakaran-a9a573349/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <a href="https://github.com/srimathidhinakaran" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+      </div>
+      <div class="footnote">
+        <i class="fas fa-asterisk" style="font-size:0.5rem;"></i>  Srimathi Dhinakaran · 2026
+      </div>
+    </div>
+
+  </div> <!-- end glass-card -->
+</div> <!-- end portfolio-wrapper -->
+
+<!-- JavaScript: SPA tab switching -->
+<script>
+  (function() {
+    const navBtns = document.querySelectorAll('.nav-btn');
+    const pageIds = ['pageProfile', 'pageEducation', 'pageAchievements', 'pageProjects', 'pageSkills'];
+    const pages = {};
+    pageIds.forEach(id => { pages[id] = document.getElementById(id); });
+
+    function activatePage(pageId) {
+      // hide all pages
+      Object.values(pages).forEach(p => { if (p) p.classList.remove('active-page'); });
+      // show target
+      const target = pages[pageId];
+      if (target) target.classList.add('active-page');
+
+      // update nav buttons
+      navBtns.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.page === pageId) {
+          btn.classList.add('active');
+        }
+      });
+    }
+
+    navBtns.forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const pageId = this.dataset.page;
+        if (pageId && pages[pageId]) activatePage(pageId);
+      });
+    });
+
+    // set default active page
+    const activeNav = document.querySelector('.nav-btn.active');
+    if (activeNav) {
+      const defaultPage = activeNav.dataset.page;
+      if (defaultPage && pages[defaultPage]) activatePage(defaultPage);
+    } else {
+      activatePage('pageProfile');
+    }
+  })();
+</script>
+
+</body>
+</html>
